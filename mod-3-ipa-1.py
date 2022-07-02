@@ -36,8 +36,16 @@ def shift_letter(letter, shift):
         a single space if the original letter was a space.
     '''
     # Replace `pass` with your code. 
-    # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+    # Stay within the function. Only use the parameters as input. The function should return your answer
+    '''A is 65
+    Z is 90
+    min 65
+    max 90'''
+    if(letter == ' '):
+        return ' '
+
+    shift = (shift + ord(letter.title()) - 65) % 26
+    return str(chr(shift + 65))
 
 def caesar_cipher(message, shift):
     '''Caesar Cipher. 
@@ -59,7 +67,11 @@ def caesar_cipher(message, shift):
     '''
     # Replace `pass` with your code. 
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+    shifted_string = ""
+    for characters in message:
+        shifted_string += shift_letter(characters, shift)
+
+    return shifted_string
 
 def shift_by_letter(letter, letter_shift):
     '''Shift By Letter. 
@@ -89,7 +101,14 @@ def shift_by_letter(letter, letter_shift):
     '''
     # Replace `pass` with your code. 
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+    # first we get the ordinal value of the letter_shift
+
+    if(letter == ' '):
+        return ' '
+
+    shift_ordinal = ord(letter_shift.title()) - 65
+    # then we shift the input
+    return shift_letter(letter, shift_ordinal)
 
 def vigenere_cipher(message, key):
     '''Vigenere Cipher. 
@@ -122,7 +141,11 @@ def vigenere_cipher(message, key):
     '''
     # Replace `pass` with your code. 
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+    keylen = len(key)
+    for i in range(len(message)):
+        shift_letter(message[i], ord(key[i % keylen].title()) - 65)
+        
+    return message
 
 def scytale_cipher(message, shift):
     '''Scytale Cipher.
@@ -176,8 +199,18 @@ def scytale_cipher(message, shift):
     '''
     # Replace `pass` with your code. 
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
 
+    # check if the length of the message is a multiple of the shift
+    while(len(message) % shift != 0):
+        message += '_'
+
+    newStr : str = ""
+    for i in range(len(message)):
+        newStr += message[(i // shift) + (len(message) // shift) * (i % shift)]
+
+    return newStr
+
+import math
 def scytale_decipher(message, shift):
     '''Scytale De-cipher.
     15 points.
@@ -205,4 +238,40 @@ def scytale_decipher(message, shift):
     '''
     # Replace `pass` with your code. 
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+    # just reverse it
+
+    # Reverse this algorithm
+    # newStr += message[(i // shift) + (len(message) // shift) * (i % shift)]
+
+    # reverseString : str = ""
+    # potentialInverse : int = -1
+    # for i in range(len(message)):
+    #     for x in range(0, shift):
+    #         potentialInverse = (i * x) % shift
+    #         if (potentialInverse == 1):
+    #             break
+
+    #     first = i // shift
+    #     second = len(message) // shift
+    #     third = potentialInverse
+    #     reverseString += message[third // second - first]
+    # return reverseString
+
+    chars = [c for c in message]
+    chunks = int(math.ceil(len(chars) / float(shift)))
+    inters, i, j = [], 1, 1
+    
+    while i <= shift:
+        inters.append(tuple(chars[j - 1:(j + chunks) -1]))
+        i += 1
+        j += chunks
+        
+    plain, k = [], 0
+    while k < chunks:
+        l = 0
+        while l < len(inters):
+            plain.append(inters[l][k])
+            l += 1
+        k += 1
+        
+    return ''.join(plain)
