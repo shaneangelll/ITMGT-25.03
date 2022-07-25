@@ -110,6 +110,9 @@ def shift_by_letter(letter, letter_shift):
     # then we shift the input
     return shift_letter(letter, shift_ordinal)
 
+# alphabet = 'abcdefghijklmnopqrstuvwxyz'.upper()
+# letter_to_index = dict(zip(alphabet, range(len(alphabet))))
+# index_to_letter = dict(zip(range(len(alphabet)), alphabet))
 def vigenere_cipher(message, key):
     '''Vigenere Cipher. 
     15 points.
@@ -141,11 +144,41 @@ def vigenere_cipher(message, key):
     '''
     # Replace `pass` with your code. 
     # Stay within the function. Only use the parameters as input. The function should return your answer.
+    # keylen = len(key)
+    # for i in range(len(message)):
+    #    shift_letter(message[i], ord(key[i % keylen].title()) - 65)
+
+    letters = [
+        "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
+        "N","O", "P","Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+    new = ""
     keylen = len(key)
-    for i in range(len(message)):
-        shift_letter(message[i], ord(key[i % keylen].title()) - 65)
+    shift = []
+
+    for i in range(len(key)):
+        for j in range(26):
+            if key[i]==letters[j]:
+                shift+=[j]
+    for m in range(len(message)):
+        if message[m]==' ':
+            new += " "
+        for n in range(26):
+            if message[m]==letters[n]:
+                new += letters [(n+shift[m%keylen])%26]
+    
+    # new = " "
+    # split_message = [message[i:i + len(key)] for i in range(0, len(message), len(key))]
+    
+    # conversion
+    # for each_split in split_message:
+    #    i = 0
+    #    for letter in each_split:
+    #        number = (letter_to_index[letter] + letter_to_index[key[i]]) % len(alphabet)
+    #        new += index_to_letter[number]
+    #        i += 1
         
-    return message
+    return new
+
 
 def scytale_cipher(message, shift):
     '''Scytale Cipher.
@@ -210,7 +243,6 @@ def scytale_cipher(message, shift):
 
     return newStr
 
-import math
 def scytale_decipher(message, shift):
     '''Scytale De-cipher.
     15 points.
@@ -257,21 +289,11 @@ def scytale_decipher(message, shift):
     #     reverseString += message[third // second - first]
     # return reverseString
 
-    chars = [c for c in message]
-    chunks = int(math.ceil(len(chars) / float(shift)))
-    inters, i, j = [], 1, 1
-    
-    while i <= shift:
-        inters.append(tuple(chars[j - 1:(j + chunks) -1]))
-        i += 1
-        j += chunks
-        
-    plain, k = [], 0
-    while k < chunks:
-        l = 0
-        while l < len(inters):
-            plain.append(inters[l][k])
-            l += 1
-        k += 1
+    deciphered = message.upper()
+    old = list(message)
+    plain = list()
+
+    for i in range(shift):
+        plain.extend(old[i::shift])
         
     return ''.join(plain)
