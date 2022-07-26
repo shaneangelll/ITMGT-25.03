@@ -41,7 +41,56 @@ def relationship_status(from_member, to_member, social_graph):
     '''
     # Replace `pass` with your code. 
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+    social_graph = {
+    "@bongolpoc":{"first_name":"Joselito",
+                  "last_name":"Olpoc",
+                  "following":[
+                  ]
+    },
+    "@joaquin":  {"first_name":"Joaquin",
+                  "last_name":"Gonzales",
+                  "following":[
+                      "@chums","@jobenilagan"
+                  ]
+    },
+    "@chums" : {"first_name":"Matthew",
+                "last_name":"Uy",
+                "following":[
+                    "@bongolpoc","@miketan","@rudyang","@joeilagan"
+                ]
+    },
+    "@jobenilagan":{"first_name":"Joben",
+                   "last_name":"Ilagan",
+                   "following":[
+                    "@eeebeee","@joeilagan","@chums","@joaquin"
+                   ]
+    },
+    "@joeilagan":{"first_name":"Joe",
+                  "last_name":"Ilagan",
+                  "following":[
+                    "@eeebeee","@jobenilagan","@chums"
+                  ]
+    },
+    "@eeebeee":  {"first_name":"Elizabeth",
+                  "last_name":"Ilagan",
+                  "following":[
+                    "@jobenilagan","@joeilagan"
+                  ]
+    },
+}
+
+    is_followed : bool = to_member in social_graph[from_member]["following"] # checks if attribute is within given param
+    is_following : bool = from_member in social_graph[to_member]["following"]
+
+    
+    if is_followed == True and is_following == True:
+        return "friends"
+    elif is_following == True:
+        return "follower"
+    elif is_followed == True:
+        return "followed by"
+    else:
+        return "no relationship"
 
 
 def tic_tac_toe(board):
@@ -70,7 +119,161 @@ def tic_tac_toe(board):
     '''
     # Replace `pass` with your code. 
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+    if len(board) == 3:
+        y = []
+        for i in range(len(board)):
+            for j in range(len(board[i])):
+                if board[i][j] == 'X':
+                    y.append(22)
+                elif board[i][j] == 'O':
+                    y.append(15)
+                else:
+                    y.append(0)
+                    
+        points = [y[k:k+3] for k in range (0, len(y), 3)]
+        
+        h_sums = [sum(v) for v in points]
+        v_sums = [sum(v) for v in zip(*points)]
+        diagonal_ud = sum([points[i][i] for i, n in enumerate(points)])
+        diagonal_du = sum([points[2-i][i] for i, n in enumerate(points)])
+        
+        for i in h_sums:
+            if i == 66:
+                return print('X')
+            elif i == 45:
+                return print('O')
+        for i in v_sums:
+            if i == 66:
+                return print('X')
+            elif i == 45:
+                return print('O')
+        if diagonal_ud == 66:
+                return print('X')
+        if diagonal_ud == 45:
+                return print('O')
+        if diagonal_du == 66:
+                return print('X')
+        if diagonal_du == 45:
+                return print('O')
+        else:
+                return print('No Winner')
+    
+    elif len(board) == 4:
+        y = []
+        for i in range(len(board)):
+            for j in range(len(board[i])):
+                if board[i][j] == 'X':
+                    y.append(22)
+                elif board[i][j] == 'O':
+                    y.append(15)
+                else:
+                    y.append(0)
+                    
+        points = [y[k:k+4] for k in range (0, len(y), 4)]
+        
+        h_sums = [sum(v) for v in points]
+        v_sums = [sum(v) for v in zip(*points)]
+        diagonal_ud = sum([points[i][i] for i, n in enumerate(points)])
+        diagonal_du = sum([points[2-i][i] for i, n in enumerate(points)])
+        
+        for i in h_sums:
+            if i == 88:
+                return print('X')
+            elif i == 60:
+                return print('O')
+        for i in v_sums:
+            if i == 88:
+                return print('X')
+            elif i == 60:
+                return print('O')
+        if diagonal_ud == 88:
+                return print('X')
+        if diagonal_ud == 60:
+                return print('O')
+        if diagonal_du == 88:
+                return print('X')
+        if diagonal_du == 60:
+                return print('O')
+        else:
+                return print('No Winner')
+    
+    elif len(board) == 5:
+        y = []
+        for i in range(len(board)):
+            for j in range(len(board[i])):
+                if board[i][j] == 'X':
+                    y.append(22)
+                elif board[i][j] == 'O':
+                    y.append(15)
+                else:
+                    y.append(0)
+                    
+        points = [y[k:k+5] for k in range (0, len(y), 5)]
+        
+        h_sums = [sum(v) for v in points]
+        v_sums = [sum(v) for v in zip(*points)]
+        diagonal_ud = sum([points[i][i] for i, n in enumerate(points)])
+        diagonal_du = sum([points[2-i][i] for i, n in enumerate(points)])
+        
+        for i in h_sums:
+            if i == 110:
+                return print('X')
+            elif i == 75:
+                return print('O')
+        for i in v_sums:
+            if i == 110:
+                return print('X')
+            elif i == 75:
+                return print('O')
+        if diagonal_ud == 110:
+                return print('X')
+        if diagonal_ud == 75:
+                return print('O')
+        if diagonal_du == 110:
+                return print('X')
+        if diagonal_du == 75:
+                return print('O')
+        else:
+                return print('No Winner') 
+    
+    elif len(board) == 6:
+        y = []
+        for i in range(len(board)):
+            for j in range(len(board[i])):
+                if board[i][j] == 'X':
+                    y.append(22)
+                elif board[i][j] == 'O':
+                    y.append(15)
+                else:
+                    y.append(0)
+                    
+        points = [y[k:k+6] for k in range (0, len(y), 6)]
+        
+        h_sums = [sum(v) for v in points]
+        v_sums = [sum(v) for v in zip(*points)]
+        diagonal_ud = sum([points[i][i] for i, n in enumerate(points)])
+        diagonal_du = sum([points[2-i][i] for i, n in enumerate(points)])
+        
+        for i in h_sums:
+            if i == 132:
+                return print('X')
+            elif i == 90:
+                return print('O')
+        for i in v_sums:
+            if i == 132:
+                return print('X')
+            elif i == 90:
+                return print('O')
+        if diagonal_ud == 132:
+                return print('X')
+        if diagonal_ud == 90:
+                return print('O')
+        if diagonal_du == 132:
+                return print('X')
+        if diagonal_du == 90:
+                return print('O')
+        else:
+                return print('No Winner')
 
 def eta(first_stop, second_stop, route_map):
     '''ETA. 
@@ -103,4 +306,25 @@ def eta(first_stop, second_stop, route_map):
     '''
     # Replace `pass` with your code. 
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+    route_map = {("upd","admu"):{"travel_time_mins":10},
+            ("admu","dlsu"):{"travel_time_mins":35},
+            ("dlsu","upd"):{"travel_time_mins":55}}
+    
+    t = 0
+    for y in route_map.keys():
+        if y[0] == first_stop:
+            if y[1] == second_stop:
+                t = route_map[first_stop, second_stop]["travel_time_mins"]
+                return t
+            else:
+                # what if the y pair doesnt exist for this iteration?
+                t += route_map[y]["travel_time_mins"]
+                m = y[1]
+                break
+            # make a case for when the second stop doesnt exist in the object
+    for v in route_map.keys():
+        if v[0] == m and v[1] == second_stop:
+            t += route_map[v]["travel_time_mins"]
+        return t
+
+        # put an escape clause for an invalid case
